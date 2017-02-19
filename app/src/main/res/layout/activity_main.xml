@@ -14,7 +14,15 @@
         android:id="@+id/edit_seconds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="seconds"
+        android:hint="Seconds"
+        android:ems="10"
+        android:inputType="numberSigned"/>
+
+    <EditText
+        android:id="@+id/edit_rest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Rest"
         android:ems="10"
         android:inputType="numberSigned"/>
 

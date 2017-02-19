@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
+    private EditText editRest;
     private Button buttonStart;
     private Button buttonCancel;
     private Button buttonPause;
@@ -20,13 +21,19 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private boolean isPaused = false;
     private int secondsLeft;
+    private int periodLength = 15;
+
+    private Exercise exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        exercise = new Exercise();
+
         editText = (EditText) findViewById(R.id.edit_seconds);
+        editRest = (EditText) findViewById(R.id.edit_rest);
         buttonStart = (Button) findViewById(R.id.start_btn);
         buttonPause = (Button) findViewById(R.id.pause_btn);
         buttonCancel = (Button) findViewById(R.id.cancel_btn);
@@ -37,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                String text = editText.getText().toString();
-                if(!text.equalsIgnoreCase("")) {
+                String timer = editText.getText().toString();
+                final String rest = editRest.getText().toString();
+
+                if(!timer.equalsIgnoreCase("") && !rest.equalsIgnoreCase("")) {
                     int seconds = 0;
                     if(countDownTimer == null) {
-                        seconds = Integer.valueOf(text);
+                        seconds = Integer.valueOf(timer);
                     } else {
                         seconds = secondsLeft;
                     }
@@ -52,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
                             public void onTick(long millisUntilFinished) {
                                 textView.setText("seconds: " + (int) (millisUntilFinished / 1000));
                                 secondsLeft = (int) (millisUntilFinished / 1000);
-                                if (count <= 15) {
+                                if (count <= periodLength) {
                                     count++;
                                     Log.i("count", String.valueOf(count));
-                                    exerciseText.setText("DO SOMETHING");
-                                } else if (count > 15 && count <= 20) {
+                                    if (count == 1) {
+                                        exerciseText.setText(exercise.randomExercise());
+                                    }
+                                } else if (count > periodLength && count < (periodLength + Integer.valueOf(rest))) {
                                     count++;
                                     Log.i("count", String.valueOf(count));
                                     exerciseText.setText("REST");
