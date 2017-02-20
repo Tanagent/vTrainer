@@ -27,37 +27,8 @@
         android:inputType="numberSigned"/>
 
     <Button
-        android:id="@+id/start_btn"
+        android:id="@+id/next_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="START"/>
-
-    <Button
-        android:id="@+id/pause_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PAUSE / RESUME"/>
-
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="CANCEL"/>
-
-    <TextView
-        android:id="@+id/seconds_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SECONDS"
-        android:gravity="center"
-        android:textSize="32dp"/>
-
-    <TextView
-        android:id="@+id/exercise_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="EXERCISE"
-        android:gravity="center"
-        android:textSize="32dp"/>
+        android:text="NEXT"/>
 </LinearLayout>

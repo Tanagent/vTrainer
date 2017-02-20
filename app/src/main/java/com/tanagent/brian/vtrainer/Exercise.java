@@ -9,12 +9,30 @@ import java.util.Random;
 
 public class Exercise {
     private Random random = new Random();
-    private ArrayList<String> exercises = new ArrayList<String>(){{
-        add("Push Ups");
-        add("Sit Ups");
-        add("Chin Ups");
-        add("Pull Ups");
-    }};
+
+    public void setExercises(ArrayList<String> exercises) {
+        this.exercises = exercises;
+    }
+
+    public String getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(String exercise) {
+        this.exercise = exercise;
+    }
+
+    public int getPhotoID() {
+        return photoID;
+    }
+
+    public void setPhotoID(int photoID) {
+        this.photoID = photoID;
+    }
+
+    private ArrayList<String> exercises;
+    private String exercise;
+    private int photoID;
 
     public Exercise() {}
 
@@ -22,11 +40,22 @@ public class Exercise {
         this.exercises = exercises;
     }
 
+    public Exercise(String exercise, int photoID) {
+        this.exercise = exercise;
+        this.photoID = photoID;
+    }
+
     public ArrayList<String> getExercises() {
         return exercises;
     }
 
-    public String randomExercise() {
-        return exercises.get(random.nextInt(4));
+    public int getSize() {
+        return exercises.size();
     }
+
+    public String randomExercise() {
+        return exercises.get(random.nextInt(getSize()));
+    }
+
+
 }
