@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.Random;
 public class TrainingActivity extends AppCompatActivity {
     private TextView timerText;
     private TextView exerciseText;
-
+    private ImageView imageView;
     private Button startButton;
     private Button cancelButton;
     private Button pauseButton;
@@ -29,9 +30,9 @@ public class TrainingActivity extends AppCompatActivity {
     private Exercise exercise;
 
     private ArrayList<String> exerciseList;
+    private ArrayList<Integer> imageList;
     private Random random = new Random();
     private int secondsLeft;
-    private int periodLength = 5;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,11 +41,12 @@ public class TrainingActivity extends AppCompatActivity {
 
         timerText = (TextView) findViewById(R.id.seconds_text);
         exerciseText = (TextView) findViewById(R.id.exercise_text);
+        imageView = (ImageView) findViewById(R.id.exercise_img);
         startButton = (Button) findViewById(R.id.start_btn);
         cancelButton = (Button) findViewById(R.id.cancel_btn);
-        pauseButton = (Button) findViewById(R.id.pause_btn);
-//        exercise = new Exercise();
+//        pauseButton = (Button) findViewById(R.id.pause_btn);
         exerciseList = getIntent().getStringArrayListExtra("list");
+        imageList = getIntent().getIntegerArrayListExtra("image");
 
 
         timerText.setText(getIntent().getStringExtra("timer"));
@@ -54,6 +56,7 @@ public class TrainingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String timer = getIntent().getStringExtra("timer");
+                final String periodLength = getIntent().getStringExtra("period");
                 final String rest = getIntent().getStringExtra("rest");
 
                 if(!timer.equalsIgnoreCase("") && !rest.equalsIgnoreCase("")) {
@@ -70,16 +73,19 @@ public class TrainingActivity extends AppCompatActivity {
                             public void onTick(long millisUntilFinished) {
                                 timerText.setText("seconds: " + (int) (millisUntilFinished / 1000));
                                 secondsLeft = (int) (millisUntilFinished / 1000);
-                                if (count <= periodLength) {
+                                if (count <= Integer.valueOf(periodLength)) {
                                     count++;
                                     Log.i("count", String.valueOf(count));
                                     if (count == 1) {
-                                        exerciseText.setText(exerciseList.get(random.nextInt(exerciseList.size())));
+                                        int num = random.nextInt(exerciseList.size());
+                                        exerciseText.setText(exerciseList.get(num));
+                                        imageView.setImageResource(imageList.get(num));
                                     }
-                                } else if (count > periodLength && count < (periodLength + Integer.valueOf(rest))) {
+                                } else if (count > Integer.valueOf(periodLength) && count < (Integer.valueOf(periodLength) + Integer.valueOf(rest))) {
                                     count++;
                                     Log.i("count", String.valueOf(count));
                                     exerciseText.setText("REST");
+                                    imageView.setImageResource(R.drawable.rest);
                                 } else {
                                     count = 0;
                                     Log.i("count", String.valueOf(count));
@@ -109,14 +115,11 @@ public class TrainingActivity extends AppCompatActivity {
             }
         });
 
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        Log.i("rest1", getIntent().getStringExtra("rest"));
-        Log.i("arraystuff", String.valueOf(getIntent().getStringArrayListExtra("list")));
+//        pauseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 }

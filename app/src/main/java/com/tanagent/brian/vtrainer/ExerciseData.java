@@ -10,7 +10,7 @@ public class ExerciseData implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String name;
-    private String emailId;
+    private int photoId;
     private boolean isSelected;
     private Exercise exercise;
 
@@ -18,16 +18,21 @@ public class ExerciseData implements Serializable {
 
     }
 
-    public ExerciseData(String name, String emailId) {
+    public ExerciseData(String name, int photoId) {
 
         this.name = name;
-        this.emailId = emailId;
+        this.photoId = photoId;
 
     }
 
     public ExerciseData(String name, boolean isSelected) {
 
         this.name = name;
+        this.isSelected = isSelected;
+    }
+
+    public ExerciseData(Exercise exercise, boolean isSelected) {
+        this.exercise = exercise;
         this.isSelected = isSelected;
     }
 
@@ -39,12 +44,12 @@ public class ExerciseData implements Serializable {
         this.name = name;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public int getPhotoId() {
+        return photoId;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
     }
 
     public boolean isSelected() {
@@ -53,5 +58,13 @@ public class ExerciseData implements Serializable {
 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public String getExerciseName() {
+        return exercise.getExercise();
+    }
+
+    public int getExercisePhotoId() {
+        return exercise.getPhotoID();
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,9 @@ public class CardViewDataAdapter extends
 
         final int pos = position;
 
-        viewHolder.tvName.setText(stList.get(position).getName());
+        viewHolder.tvName.setText(stList.get(position).getExerciseName());
+
+        viewHolder.imageView.setImageResource(stList.get(position).getExercisePhotoId());
 
         viewHolder.chkSelected.setChecked(stList.get(position).isSelected());
 
@@ -57,11 +60,6 @@ public class CardViewDataAdapter extends
 
                 contact.setSelected(cb.isChecked());
                 stList.get(pos).setSelected(cb.isChecked());
-
-                Toast.makeText(
-                        v.getContext(),
-                        "Clicked on Checkbox: " + cb.getText() + " is "
-                                + cb.isChecked(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,7 +74,7 @@ public class CardViewDataAdapter extends
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvName;
-        public TextView tvEmailId;
+        public ImageView imageView;
 
         public CheckBox chkSelected;
 
@@ -86,6 +84,7 @@ public class CardViewDataAdapter extends
             super(itemLayoutView);
 
             tvName = (TextView) itemLayoutView.findViewById(R.id.tvName);
+            imageView = (ImageView) itemLayoutView.findViewById(R.id.image_card);
 
             chkSelected = (CheckBox) itemLayoutView
                     .findViewById(R.id.chkSelected);

@@ -14,7 +14,15 @@
         android:id="@+id/edit_seconds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Seconds"
+        android:hint="Enter entire work out session in seconds"
+        android:ems="10"
+        android:inputType="numberSigned"/>
+
+    <EditText
+        android:id="@+id/edit_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter period length in seconds"
         android:ems="10"
         android:inputType="numberSigned"/>
 
@@ -22,7 +30,7 @@
         android:id="@+id/edit_rest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Rest"
+        android:hint="Enter resting period in seconds"
         android:ems="10"
         android:inputType="numberSigned"/>
 

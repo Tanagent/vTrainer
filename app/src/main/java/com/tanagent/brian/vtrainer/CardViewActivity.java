@@ -24,58 +24,35 @@ public class CardViewActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<ExerciseData> exerciseDataList;
-    private ArrayList<String> exerciseList;
+    private ArrayList<Exercise> exerciseList;
     private ArrayList<String> selectedExerciseList;
+    private ArrayList<Integer> selectedExerciseImage;
 
     private Button btnSelection;
 
-    private ArrayList<String> exercises = new ArrayList<String>(){{
-        add("Push Up");
-        add("Sit Up");
-        add("Chin Up");
-        add("Pull Up");
-        add("Planks");
-        add("Lunge");
-        add("Overhead Press");
-        add("Fly");
-        add("Reverse Fly");
-        add("Squat");
-        add("Leg Curl");
-        add("Row");
-        add("Bench Press");
-        add("Crunch");
-        add("Russian Twist");
-        add("Hyperextension");
-        add("Leg Extension");
-        add("Calf Raises");
-        add("Dip");
-        add("Leg Press");
-        add("Burpee");
+    private ArrayList<Exercise> exercises = new ArrayList<Exercise>(){{
+        add(new Exercise("Push Up", R.drawable.push_up));
+        add(new Exercise("Sit Up", R.drawable.sit_up));
+        add(new Exercise("Chin Up", R.drawable.chin_up));
+        add(new Exercise("Pull Up", R.drawable.pull_up));
+        add(new Exercise("Planks", R.drawable.planks));
+        add(new Exercise("Lunge", R.drawable.lunges));
+        add(new Exercise("Overhead Press", R.drawable.overhead_press));
+        add(new Exercise("Fly", R.drawable.fly));
+        add(new Exercise("Reverse Fly", R.drawable.reverse_fly));
+        add(new Exercise("Squat", R.drawable.squat));
+        add(new Exercise("Leg Curl", R.drawable.leg_curl));
+        add(new Exercise("Row", R.drawable.rows));
+        add(new Exercise("Bench Press", R.drawable.bench_press));
+        add(new Exercise("Crunch", R.drawable.crunches));
+        add(new Exercise("Russian Twist", R.drawable.russian_twist));
+        add(new Exercise("Hyperextension", R.drawable.hyperextension));
+        add(new Exercise("Leg Extension", R.drawable.leg_extension));
+        add(new Exercise("Calf Raises", R.drawable.calf_raise));
+        add(new Exercise("Dip", R.drawable.dips));
+        add(new Exercise("Leg Press", R.drawable.leg_press));
+        add(new Exercise("Burpee", R.drawable.burpee));
     }};
-
-//    private ArrayList<Exercise> exercises = new ArrayList<Exercise>(){{
-//        add(new Exercise("Push Up", R.drawable.push_up));
-//        add(new Exercise("Sit Up", R.drawable.push_up));
-//        add(new Exercise("Chin Up", R.drawable.push_up));
-//        add(new Exercise("Pull Up", R.drawable.push_up));
-//        add(new Exercise("Planks", R.drawable.push_up));
-//        add(new Exercise("Lunge", R.drawable.push_up));
-//        add(new Exercise("Overhead Press", R.drawable.push_up));
-//        add(new Exercise("Fly", R.drawable.push_up));
-//        add(new Exercise("Reverse Fly", R.drawable.push_up));
-//        add(new Exercise("Squat", R.drawable.push_up));
-//        add(new Exercise("Leg Curl", R.drawable.push_up));
-//        add(new Exercise("Row", R.drawable.push_up));
-//        add(new Exercise("Bench Press", R.drawable.push_up));
-//        add(new Exercise("Crunch", R.drawable.push_up));
-//        add(new Exercise("Russian Twist", R.drawable.push_up));
-//        add(new Exercise("Hyperextension", R.drawable.hyperextension));
-//        add(new Exercise("Leg Extension", R.drawable.leg_extension));
-//        add(new Exercise("Calf Raises", R.drawable.push_up));
-//        add(new Exercise("Dip", R.drawable.push_up));
-//        add(new Exercise("Leg Press", R.drawable.push_up));
-//        add(new Exercise("Burpee", R.drawable.push_up));
-//    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +62,11 @@ public class CardViewActivity extends AppCompatActivity {
 
         exerciseDataList = new ArrayList<ExerciseData>();
         selectedExerciseList = new ArrayList<>();
+        selectedExerciseImage = new ArrayList<>();
         Exercise ex = new Exercise();
         exerciseList = exercises;
 
-        Log.i("timer", getIntent().getStringExtra("timer"));
-        Log.i("rest", getIntent().getStringExtra("rest"));
-
-
-        for(String exercise : exerciseList) {
+        for(Exercise exercise : exerciseList) {
             ExerciseData exerciseData = new ExerciseData(exercise, false);
             exerciseDataList.add(exerciseData);
         }
@@ -123,8 +97,9 @@ public class CardViewActivity extends AppCompatActivity {
                 for(ExerciseData selectedExercises : exList) {
                     ExerciseData singleExerciseData = selectedExercises;
                     if (singleExerciseData.isSelected()) {
-                        data = data + "\n" + singleExerciseData.getName().toString();
-                        selectedExerciseList.add(singleExerciseData.getName().toString());
+                        data = data + "\n" + singleExerciseData.getExerciseName().toString();
+                        selectedExerciseList.add(singleExerciseData.getExerciseName().toString());
+                        selectedExerciseImage.add(singleExerciseData.getExercisePhotoId());
                     }
                 }
 
@@ -135,7 +110,9 @@ public class CardViewActivity extends AppCompatActivity {
                 Intent intent = new Intent(CardViewActivity.this, TrainingActivity.class);
                 intent.putExtra("timer", getIntent().getStringExtra("timer"));
                 intent.putExtra("rest", getIntent().getStringExtra("rest"));
+                intent.putExtra("period", getIntent().getStringExtra("period"));
                 intent.putExtra("list", selectedExerciseList);
+                intent.putExtra("image", selectedExerciseImage);
 
                 startActivity(intent);
             }
