@@ -1,5 +1,6 @@
 package com.tanagent.brian.vtrainer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by Brian on 2/19/17.
  */
 
-public class CardViewActivity extends AppCompatActivity {
+public class CardViewActivity extends Activity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;

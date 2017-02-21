@@ -1,5 +1,6 @@
 package com.tanagent.brian.vtrainer;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -18,7 +19,7 @@ import java.util.Random;
  * Created by Brian on 2/19/17.
  */
 
-public class TrainingActivity extends AppCompatActivity {
+public class TrainingActivity extends Activity {
     private TextView timerText;
     private TextView exerciseText;
     private ImageView imageView;
@@ -112,6 +113,7 @@ public class TrainingActivity extends AppCompatActivity {
                 }
 
                 timerText.setText(getIntent().getStringExtra("timer"));
+                imageView.setImageResource(R.drawable.rest);
             }
         });
 
