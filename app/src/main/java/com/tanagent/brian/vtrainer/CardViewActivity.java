@@ -104,18 +104,22 @@ public class CardViewActivity extends Activity {
                     }
                 }
 
-                Toast.makeText(CardViewActivity.this,
-                        "Selected Exercises: \n" + data, Toast.LENGTH_SHORT)
-                        .show();
+                if(!selectedExerciseImage.isEmpty()) {
+                    Toast.makeText(CardViewActivity.this,
+                            "Selected Exercises: \n" + data, Toast.LENGTH_SHORT)
+                            .show();
 
-                Intent intent = new Intent(CardViewActivity.this, TrainingActivity.class);
-                intent.putExtra("timer", getIntent().getStringExtra("timer"));
-                intent.putExtra("rest", getIntent().getStringExtra("rest"));
-                intent.putExtra("period", getIntent().getStringExtra("period"));
-                intent.putExtra("list", selectedExerciseList);
-                intent.putExtra("image", selectedExerciseImage);
+                    Intent intent = new Intent(CardViewActivity.this, TrainingActivity.class);
+                    intent.putExtra("timer", getIntent().getStringExtra("timer"));
+                    intent.putExtra("rest", getIntent().getStringExtra("rest"));
+                    intent.putExtra("period", getIntent().getStringExtra("period"));
+                    intent.putExtra("list", selectedExerciseList);
+                    intent.putExtra("image", selectedExerciseImage);
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CardViewActivity.this, "Please select at least one exercise", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
